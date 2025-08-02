@@ -1,12 +1,14 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import { Stack } from 'expo-router'
+import { Stack, Tabs } from 'expo-router'
 
 const TabLayout = () => {
   return (
-    <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name='welcome' />
-    </Stack>
+    <Tabs screenOptions={{ headerShown: false }} initialRouteName='form'>
+      <Tabs.Screen name='form' />
+      <Tabs.Screen name='details' />
+      <Tabs.Screen name='logout' />
+    </Tabs>
   )
 }
 
