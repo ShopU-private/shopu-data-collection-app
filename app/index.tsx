@@ -11,7 +11,7 @@ const Index = () => {
     return <Redirect href={"/(auth)/login"} />
   }
   else {
-    return <Redirect href={"/(root)/(tabs)/welcome"} />
+    return <Redirect href={"/(root)/(tabs)/form"} />
   }
 }
 

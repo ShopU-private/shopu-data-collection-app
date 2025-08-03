@@ -5,12 +5,12 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 const Form = () => {
   return (
     <ScrollView>
-          <SafeAreaView>
-            <View>
-              <Text>Details</Text>
-            </View>
-          </SafeAreaView>
-        </ScrollView>
+      <SafeAreaView>
+        <View>
+          <Text>Form</Text>
+        </View>
+      </SafeAreaView>
+    </ScrollView>
   )
 }
 
