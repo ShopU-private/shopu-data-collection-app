@@ -1,8 +1,8 @@
-import React from 'react'
-import { Tabs, useRouter } from 'expo-router'
-import { Alert, Image, TouchableOpacity } from 'react-native';
 import { useAuth } from '@/context/AuthContext';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { Tabs, useRouter } from 'expo-router';
+import React from 'react';
+import { Alert, Image, TouchableOpacity } from 'react-native';
 
 const LogoutButton = () => {
   const { logout } = useAuth();
@@ -44,23 +44,39 @@ const TabLayout = () => {
         headerRight: () => <LogoutButton />,
         headerStyle: {
           backgroundColor: '#337D81',
+          borderBottomLeftRadius: 20,
+          borderBottomRightRadius: 20,
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.15,
+          shadowRadius: 4,
+          elevation: 5,
         },
         headerTintColor: 'white',
         headerTitleStyle: {
           marginLeft: 10,
           textTransform: 'capitalize',
-          fontWeight: 'semibold'
+          fontWeight: '700',
+          letterSpacing: 1,
         },
         tabBarActiveTintColor: 'white',
         tabBarActiveBackgroundColor: '#337D81',
+        tabBarInactiveTintColor: '#337D81',
         tabBarStyle: {
-          borderRadius: 50,
+          borderRadius: 20,
           margin: 20,
-          padding: 10,
+          backgroundColor: '#fff',
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.10,
+          shadowRadius: 4,
+          elevation: 5,
+          borderWidth: 0,
         },
         tabBarLabelStyle: {
           textTransform: 'capitalize',
-          fontWeight: 'bold'
+          fontWeight: '700',
+          fontSize: 15,
         }
       }}
       initialRouteName='form'
