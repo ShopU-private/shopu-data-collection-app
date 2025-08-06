@@ -15,6 +15,8 @@ const Form = () => {
   const [companies, setCompanies] = useState<Company[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const debouncedSearchValue = useDebounced(searchTerm, 500);
+  const [selectedCompanies, setSelectedCompanies] = useState<Company[]>([]);
+  const [showDropDown, setShowDropDown] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,68 +40,110 @@ const Form = () => {
 
   const handleSearchTerm = (text: string) => {
     setSearchTerm(text);
+    setShowDropDown(true)
   }
+
+  const handleCompanySelect = (company: Company) => {
+    if (!selectedCompanies.find((selected) => selected._id === company._id)) {
+      setSelectedCompanies([...selectedCompanies, company])
+    }
+    setSearchTerm('');
+    setShowDropDown(false)
+  };
+
+  const removeSelectedCompanies = (companyId: string) => {
+    setSelectedCompanies(selectedCompanies.filter((company) => company._id !== companyId))
+  }
+
+
   return (
-    <KeyboardAvoidingView style={{ flex: 1, backgroundColor: '#F6FAFA' }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+    <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <View className='w-[95%] m-auto flex justify-center py-8'>
-          <View className='bg-white rounded-2xl shadow-lg px-6 py-8'>
-            <View className='mb-6'>
-              <Text className='text-primary font-semibold text-lg mb-2'>Company name</Text>
+        <View>
+          <View>
+            <View>
+              <Text>Company name</Text>
+              {selectedCompanies.map((company) => (
+                <View key={company._id}>
+                  <Text>{company.name}</Text>
+                  <TouchableOpacity onPress={() => removeSelectedCompanies(company._id)}>
+                    <Text>x</Text>
+                  </TouchableOpacity>
+                </View>
+              ))}
               <TextInput
                 placeholder='Search companies name'
                 value={searchTerm}
                 onChangeText={handleSearchTerm}
-                className='border border-gray-200 px-4 py-3 rounded-lg bg-gray-50 text-base'
+                onFocus={() => setShowDropDown(true)}
                 placeholderTextColor="#A0A0A0"
               />
-              {searchTerm && (
-                <View className='bg-white rounded-lg shadow p-2 mt-2 max-h-48'>
+              {showDropDown && searchTerm && (
+                <View>
                   {filteredCompanies.length > 0 ? (filteredCompanies.slice(0, 50).map((company) => (
-                    <TouchableOpacity key={company._id} className='py-2 px-2 rounded hover:bg-gray-100'>
-                      <Text className='text-gray-700'>{company.name}</Text>
+                    <TouchableOpacity key={company._id} onPress={() => handleCompanySelect(company)}>
+                      <Text>
+                        {company.name}
+                        {selectedCompanies.find((select) => select._id === company._id) && (
+                          <View>
+                            <Text>(selected)</Text>
+                          </View>
+                        )}
+                      </Text>
                     </TouchableOpacity>
                   ))) : (
                     <View>
-                      <Text className='text-gray-400'>No company found</Text>
+                      <Text>No company found</Text>
                     </View>
                   )}
                 </View>
               )}
             </View>
-            <View className='mb-6'>
-              <Text className='text-primary font-semibold text-lg mb-2'>Shop Name</Text>
-              <TextInput placeholder='Enter shop name' className='border border-gray-200 px-4 py-3 rounded-lg bg-gray-50 text-base' placeholderTextColor="#A0A0A0" />
+            <View>
+              <Text>Shop Name</Text>
+              <TextInput placeholder='Enter shop name' placeholderTextColor="#A0A0A0" />
             </View>
-            <View className='mb-6'>
-              <Text className='text-primary font-semibold text-lg mb-2'>Address Line 1</Text>
-              <TextInput placeholder='Enter address line 1' className='border border-gray-200 px-4 py-3 rounded-lg bg-gray-50 text-base' placeholderTextColor="#A0A0A0" />
+            <View>
+              <Text>Address Line 1</Text>
+              <TextInput placeholder='Enter address line 1' placeholderTextColor="#A0A0A0" />
             </View>
-            <View className='mb-6'>
-              <Text className='text-primary font-semibold text-lg mb-2'>Address Line 2</Text>
-              <TextInput placeholder='Enter address line 2' className='border border-gray-200 px-4 py-3 rounded-lg bg-gray-50 text-base' placeholderTextColor="#A0A0A0" />
+            <View>
+              <Text>Address Line 2</Text>
+              <TextInput placeholder='Enter address line 2' placeholderTextColor="#A0A0A0" />
             </View>
-            <View className='mb-6'>
-              <Text className='text-primary font-semibold text-lg mb-2'>State</Text>
-              <TextInput placeholder='Enter state' className='border border-gray-200 px-4 py-3 rounded-lg bg-gray-50 text-base' placeholderTextColor="#A0A0A0" />
+            <View>
+              <Text>State</Text>
+              <TextInput placeholder='Enter state' placeholderTextColor="#A0A0A0" />
             </View>
-            <View className='mb-6'>
-              <Text className='text-primary font-semibold text-lg mb-2'>City</Text>
-              <TextInput placeholder='Enter city' className='border border-gray-200 px-4 py-3 rounded-lg bg-gray-50 text-base' placeholderTextColor="#A0A0A0" />
+            <View>
+              <Text>City</Text>
+              <TextInput placeholder='Enter city' placeholderTextColor="#A0A0A0" />
             </View>
-            <View className='mb-6'>
-              <Text className='text-primary font-semibold text-lg mb-2'>Pincode</Text>
-              <TextInput placeholder='Enter pincode' className='border border-gray-200 px-4 py-3 rounded-lg bg-gray-50 text-base' placeholderTextColor="#A0A0A0" />
+            <View>
+              <Text>Pincode</Text>
+              <TextInput placeholder='Enter pincode' placeholderTextColor="#A0A0A0" />
             </View>
-            <View className='mb-6'>
-              <Text className='text-primary font-semibold text-lg mb-2'>Phone</Text>
-              <TextInput placeholder='Enter phone' className='border border-gray-200 px-4 py-3 rounded-lg bg-gray-50 text-base' placeholderTextColor="#A0A0A0" />
+            <View>
+              <Text>Phone</Text>
+              <TextInput placeholder='Enter phone' placeholderTextColor="#A0A0A0" />
             </View>
-            <View className='bg-primary mt-2 p-4 rounded-xl shadow-md'>
+            <View>
               <TouchableOpacity>
-                <Text className='text-white text-center font-semibold text-lg tracking-wide'>Submit</Text>
+                <Text>Submit</Text>
               </TouchableOpacity>
             </View>
+            {selectedCompanies.length > 0 && (
+              <View>
+                <View>
+                  <Text>Selected companies{(selectedCompanies.length)}</Text>
+                </View>
+                <View>
+                  {selectedCompanies.map((company) => (
+                    <Text key={company._id}>{company.name}</Text>
+                  ))}
+                </View>
+              </View>
+            )}
           </View>
         </View>
       </ScrollView>

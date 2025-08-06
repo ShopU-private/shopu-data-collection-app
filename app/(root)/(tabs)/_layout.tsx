@@ -56,7 +56,7 @@ const TabLayout = () => {
         headerTitleStyle: {
           marginLeft: 10,
           textTransform: 'capitalize',
-          fontWeight: '700',
+          fontWeight: 'semibold',
           letterSpacing: 1,
         },
         tabBarActiveTintColor: 'white',
@@ -75,8 +75,7 @@ const TabLayout = () => {
         },
         tabBarLabelStyle: {
           textTransform: 'capitalize',
-          fontWeight: '700',
-          fontSize: 15,
+          fontWeight: 'semibold',
         }
       }}
       initialRouteName='form'
