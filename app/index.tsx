@@ -1,11 +1,10 @@
 import React from 'react'
 import { useAuth } from '@/context/AuthContext'
 import { Redirect } from 'expo-router'
-import { Text, View } from 'react-native';
 
 const Index = () => {
 
-  const { isLoggedIn, setIsLoggedIn } = useAuth();
+  const { isLoggedIn } = useAuth();
 
   if (!isLoggedIn) {
     return <Redirect href={"/(auth)/login"} />
