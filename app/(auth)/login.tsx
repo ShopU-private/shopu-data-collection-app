@@ -1,11 +1,11 @@
-import { ActivityIndicator, Image, KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { useAuth } from '@/context/AuthContext';
+import Feather from '@expo/vector-icons/Feather';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { useRouter } from 'expo-router';
-import { useAuth } from '@/context/AuthContext';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import Feather from '@expo/vector-icons/Feather';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, Image, KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 
 const Login = () => {
@@ -93,11 +93,11 @@ const Login = () => {
             </View>
             <View className='flex flex-col'>
               <Text className='font-[500px] text-[15px]'>Email</Text>
-              <TextInput keyboardType='email-address' className='mb-5 border px-5 rounded-md' placeholder='Enter your email' onChangeText={(value) => setForm({ ...form, email: value })} value={form.email} />
+              <TextInput keyboardType='email-address' className='mb-5 border px-5 rounded-md' placeholder='Enter your email' placeholderTextColor='gray' style={{ color: 'black' }} onChangeText={(value) => setForm({ ...form, email: value })} value={form.email} />
             </View>
             <View className='flex flex-col gap-2 relative'>
               <Text className='font-[500px] text-[15px]'>Password</Text>
-              <TextInput secureTextEntry={showPassword ? false : true} className='mb-5 border px-5 rounded-md' placeholder='Enter your password' onChangeText={(value) => setForm({ ...form, password: value })} value={form.password} />
+              <TextInput secureTextEntry={showPassword ? false : true} className='mb-5 border px-5 rounded-md' placeholder='Enter your password' placeholderTextColor='gray' style={{ color: 'black' }} onChangeText={(value) => setForm({ ...form, password: value })} value={form.password} />
               <TouchableOpacity className='absolute right-3 top-11 cursor-pointer' onPress={() => setShowPassword(!showPassword)}>
                 {showPassword ? <Feather name="eye" size={18} color="black" /> : <Feather name="eye-off" size={18} color="black" />}
               </TouchableOpacity>

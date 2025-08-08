@@ -237,6 +237,8 @@ const Form = () => {
                 onChangeText={handleSearchTerm}
                 onFocus={handleTextInputFocus}
                 onBlur={handleTextInputBlur}
+                placeholderTextColor='gray'
+                style={{ color: 'black' }}
               />
 
               {showDropDown && searchTerm && (
@@ -278,6 +280,8 @@ const Form = () => {
                 placeholder="Enter shop name"
                 value={form.shopName}
                 onChangeText={handleFormChange('shopName')}
+                placeholderTextColor='gray'
+                style={{ color: 'black' }}
               />
             </View>
 
@@ -292,6 +296,8 @@ const Form = () => {
                     placeholder="Enter address line 1"
                     value={form.addressLine1}
                     onChangeText={handleFormChange('addressLine1')}
+                    placeholderTextColor='gray'
+                    style={{ color: 'black' }}
                   />
                 </View>
 
@@ -302,6 +308,8 @@ const Form = () => {
                     placeholder="Enter address line 2 (optional)"
                     value={form.addressLine2}
                     onChangeText={handleFormChange('addressLine2')}
+                    placeholderTextColor='gray'
+                    style={{ color: 'black' }}
                   />
                 </View>
 
@@ -313,6 +321,8 @@ const Form = () => {
                       placeholder="Enter state"
                       value={form.state}
                       onChangeText={handleFormChange('state')}
+                      placeholderTextColor='gray'
+                      style={{ color: 'black' }}
                     />
                   </View>
 
@@ -323,6 +333,8 @@ const Form = () => {
                       placeholder="Enter city"
                       value={form.city}
                       onChangeText={handleFormChange('city')}
+                      placeholderTextColor='gray'
+                      style={{ color: 'black' }}
                     />
                   </View>
                 </View>
@@ -342,6 +354,8 @@ const Form = () => {
                     value={form.pincode}
                     onChangeText={handleFormChange('pincode')}
                     maxLength={6}
+                    placeholderTextColor='gray'
+                    style={{ color: 'black' }}
                   />
                 </View>
 
@@ -354,6 +368,8 @@ const Form = () => {
                     value={form.phone}
                     onChangeText={handleFormChange('phone')}
                     maxLength={10}
+                    placeholderTextColor='gray'
+                    style={{ color: 'black' }}
                   />
                 </View>
               </View>

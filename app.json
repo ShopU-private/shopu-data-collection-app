@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "shopu-store-app",
-    "slug": "shopu-store-app",
+    "name": "ShopU Data Collection",
+    "slug": "shopu-data-collection",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -16,7 +16,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.ayush9315.shopustoreapp"
     },
     "web": {
       "bundler": "metro",
@@ -37,6 +38,13 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "51d465bf-6cc0-4bdd-ba09-785ebf8ff742"
+      }
+    },
+    "owner": "ayush9315"
   }
 }

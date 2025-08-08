@@ -360,6 +360,7 @@ const Details = () => {
               elevation: 2,
             }}
             placeholder="Search companies by name, shop name, or location..."
+            placeholderTextColor="gray"
             value={mainSearchTerm}
             onChangeText={setMainSearchTerm}
             clearButtonMode="while-editing"
@@ -636,6 +637,7 @@ const Details = () => {
                   <TextInput
                     style={{ borderWidth: 1, borderColor: '#D1D5DB', borderRadius: 8, paddingHorizontal: 12, paddingVertical: 12, backgroundColor: 'white' }}
                     placeholder="Search and select companies..."
+                    placeholderTextColor="gray"
                     value={searchTerm}
                     onChangeText={handleSearchTerm}
                     onFocus={() => setShowDropDown(true)}

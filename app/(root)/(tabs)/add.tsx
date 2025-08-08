@@ -1,8 +1,8 @@
-import React, { useCallback, useState } from 'react';
-import { ActivityIndicator, Alert, KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { useRouter } from 'expo-router';
+import React, { useCallback, useState } from 'react';
+import { ActivityIndicator, Alert, KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Toast from 'react-native-toast-message';
 
 const Add = () => {
@@ -53,19 +53,19 @@ const Add = () => {
           text1: 'Success',
           text2: 'Company name added successfully!'
         });
-        
+
         // Clear the form
         setCompanyName('');
       }
     } catch (error: any) {
       const errorMessage = error.response?.data?.message || error.message || 'Failed to add company name';
-      
+
       Toast.show({
         type: 'error',
         text1: 'Error',
         text2: errorMessage
       });
-      
+
       console.error('Error adding company name:', error);
     } finally {
       setLoading(false);
@@ -113,11 +113,11 @@ const Add = () => {
           }}>
             {/* Company Name Input */}
             <View style={{ marginBottom: 24 }}>
-              <Text style={{ 
-                fontSize: 16, 
-                fontWeight: '600', 
-                color: '#1F2937', 
-                marginBottom: 8 
+              <Text style={{
+                fontSize: 16,
+                fontWeight: '600',
+                color: '#1F2937',
+                marginBottom: 8
               }}>
                 Company Name *
               </Text>
@@ -133,6 +133,7 @@ const Add = () => {
                   color: '#1F2937'
                 }}
                 placeholder="Enter company name"
+                placeholderTextColor="gray"
                 value={companyName}
                 onChangeText={handleFormChange}
                 autoCapitalize="words"
@@ -140,10 +141,10 @@ const Add = () => {
                 onSubmitEditing={handleSubmit}
                 editable={!loading}
               />
-              <Text style={{ 
-                fontSize: 12, 
-                color: '#6B7280', 
-                marginTop: 4 
+              <Text style={{
+                fontSize: 12,
+                color: '#6B7280',
+                marginTop: 4
               }}>
                 This name will be available for selection when creating new companies
               </Text>
@@ -171,20 +172,20 @@ const Add = () => {
               {loading ? (
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                   <ActivityIndicator color="white" size="small" />
-                  <Text style={{ 
-                    color: 'white', 
-                    fontSize: 16, 
-                    fontWeight: '600', 
-                    marginLeft: 8 
+                  <Text style={{
+                    color: 'white',
+                    fontSize: 16,
+                    fontWeight: '600',
+                    marginLeft: 8
                   }}>
                     Adding...
                   </Text>
                 </View>
               ) : (
-                <Text style={{ 
-                  color: 'white', 
-                  fontSize: 16, 
-                  fontWeight: '600' 
+                <Text style={{
+                  color: 'white',
+                  fontSize: 16,
+                  fontWeight: '600'
                 }}>
                   Add Company Name
                 </Text>
@@ -200,16 +201,16 @@ const Add = () => {
             borderLeftWidth: 4,
             borderLeftColor: '#3B82F6'
           }}>
-            <Text style={{ 
-              fontSize: 14, 
-              fontWeight: '600', 
-              color: '#1E40AF', 
-              marginBottom: 8 
+            <Text style={{
+              fontSize: 14,
+              fontWeight: '600',
+              color: '#1E40AF',
+              marginBottom: 8
             }}>
               💡 How it works
             </Text>
-            <Text style={{ 
-              fontSize: 14, 
+            <Text style={{
+              fontSize: 14,
               color: '#1E40AF',
               lineHeight: 20
             }}>
