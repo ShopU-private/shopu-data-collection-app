@@ -6,6 +6,7 @@ import { useRouter } from 'expo-router';
 import { useAuth } from '@/context/AuthContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Feather from '@expo/vector-icons/Feather';
+import Toast from 'react-native-toast-message';
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -30,6 +31,15 @@ const Login = () => {
   }, [router, setIsLoggedIn])
 
   const handleSubmit = async () => {
+    if (!form.email || !form.password) {
+      Toast.show({
+        type: 'error',
+        text1: 'Missing Fields',
+        text2: 'Please fill in all fields'
+      });
+      return;
+    }
+
     setIsLoading(true)
     try {
       const response = await axios.post('https://shopu-data-collection.vercel.app/api/auth/login', {
@@ -37,36 +47,51 @@ const Login = () => {
         password: form.password
       })
 
-      if (response) {
-        console.log("Logged in successfull")
+      if (response.data && response.data.token) {
+        Toast.show({
+          type: 'success',
+          text1: 'Login Successful',
+          text2: 'Welcome back!'
+        })
         await AsyncStorage.setItem('token', response.data.token);
-        setIsLoading(false)
-        router.replace('/(root)/(tabs)/form');
         setIsLoggedIn(true)
+        router.replace('/(root)/(tabs)/form');
       }
       else {
-        console.log("Failed to loggedin")
-        setIsLoading(false);
+        Toast.show({
+          type: 'error',
+          text1: 'Login Failed',
+          text2: 'Invalid credentials'
+        })
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error)
+
+      const errorMessage = error.response?.data?.message || error.message || 'Login failed. Please try again.';
+
+      Toast.show({
+        type: 'error',
+        text1: 'Login Error',
+        text2: errorMessage
+      })
+    } finally {
       setIsLoading(false)
     }
   }
 
   return (
-    <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+    <KeyboardAvoidingView style={{ flex: 1, backgroundColor: 'white' }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} className='w-[90%] m-auto'>
         <SafeAreaView className='flex-1 items-center'>
           <View>
             <Image source={require('@/assets/images/login.png')} style={{ height: 300, width: 300, marginBottom: 20 }} />
           </View>
-          <View className='w-full'>
-            <View className='mb-10'>
+          <View className='w-full shadow-lg bg-[#ffffff] mt-10'>
+            <View className='mb-5'>
               <Text className='font-extrabold text-[30px] text-center'>Welcome Back!!!</Text>
-              <Text className='font-bold text-[20px] text-center'>Login</Text>
+              <Text className='font-bold text-[25px] text-center mt-5'>Login</Text>
             </View>
-            <View className='flex flex-col gap-2'>
+            <View className='flex flex-col'>
               <Text className='font-[500px] text-[15px]'>Email</Text>
               <TextInput keyboardType='email-address' className='mb-5 border px-5 rounded-md' placeholder='Enter your email' onChangeText={(value) => setForm({ ...form, email: value })} value={form.email} />
             </View>
@@ -78,14 +103,13 @@ const Login = () => {
               </TouchableOpacity>
             </View>
             <View className='bg-primary w-full py-3 rounded-md mt-4'>
-              <TouchableOpacity onPress={handleSubmit} activeOpacity={1}>
+              <TouchableOpacity onPress={handleSubmit} activeOpacity={1} disabled={loading}>
                 {
                   loading ? <Text className='text-center'><ActivityIndicator size={"small"} className='text-white font-semibold' /></Text> : <Text className='text-white text-center font-semibold'>Login</Text>
                 }
               </TouchableOpacity>
             </View>
           </View>
-
         </SafeAreaView>
       </ScrollView>
     </KeyboardAvoidingView>
